@@ -22,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/dashkite/page-graph/issues"
   },
-  "homepage": "https://github.com/dashkite/page-graph#readme"
+  "homepage": "https://github.com/dashkite/page-graph#readme",
+  "devDependencies": {
+    "panda-9000": "^5.0.2",
+    "panda-builder": "^4.0.13"
+  }
 }
