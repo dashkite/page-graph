@@ -2,7 +2,7 @@
   "name": "@dashkite/page-graph",
   "version": "0.0.1",
   "description": "Combinators for dynamic browser pages.",
-  "main": "index.js",
+  "main": "build/npm/src/index.js",
   "scripts": {
     "test": "test"
   },
@@ -26,5 +26,10 @@
   "devDependencies": {
     "panda-9000": "^5.0.2",
     "panda-builder": "^4.0.13"
+  },
+  "dependencies": {
+    "diffhtml": "^1.0.0-beta.10",
+    "hash-sum": "^2.0.0",
+    "panda-garden": "^5.0.0"
   }
 }
