@@ -1,19 +1,11 @@
 import {innerHTML as diff} from "diffhtml"
 import {tee, rtee, curry} from "panda-garden"
 
-# TODO remove dependency on hash-sum?
-# TODO use a jquery replacement library? (see append, replace, ... below)
-# TODO use a diffHTML style update? (see replace, renderTo)
-
-add = curry rtee (key, context) -> context.bindings[key] ?= context[key]
+property = curry rtee (key, context) -> context.bindings[key] ?= context[key]
 
 append = curry (root, html) ->
   root.insertAdjacentHTML "beforeend", html
   root.lastElementChild
-
-replace = curry (el, html) ->
-  el.outerHTML = html
-  el
 
 selectOrAppend = curry (root, selector, html) ->
   if (el = root.querySelector selector)? then el else append root, html
@@ -57,4 +49,4 @@ show = tee (context) ->
   context.page.classList.add "active"
   context.view.classList.add "active"
 
-export {add, view, activate, render, show}
+export {property, view, activate, render, show}

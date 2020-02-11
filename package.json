@@ -1,5 +1,5 @@
 {
-  "name": "@dashkite/page-graph",
+  "name": "@dashkite/neon",
   "version": "0.0.1",
   "description": "Combinators for dynamic browser pages.",
   "main": "build/npm/src/index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dashkite/page-graph.git"
+    "url": "git+https://github.com/dashkite/neon.git"
   },
   "keywords": [
     "combinators",
@@ -29,7 +29,6 @@
   },
   "dependencies": {
     "diffhtml": "^1.0.0-beta.10",
-    "hash-sum": "^2.0.0",
     "panda-garden": "^5.0.0"
   }
 }
