@@ -1,7 +1,14 @@
 import {innerHTML as diff} from "diffhtml"
 import {tee, rtee, curry} from "panda-garden"
 
-property = curry rtee (key, context) -> context.bindings[key] ?= context[key]
+resource = curry rtee (getter, context) ->
+  context.resource = await getter context
+
+properties = curry rtee (dictionary, context) ->
+  Promise.all do ->
+    for key, getter of dictionary
+      do (key, getter) ->
+        context.bindings[key] = await getter context
 
 append = curry (root, html) ->
   root.insertAdjacentHTML "beforeend", html
@@ -49,4 +56,4 @@ show = tee (context) ->
   context.page.classList.add "active"
   context.view.classList.add "active"
 
-export {property, view, activate, render, show}
+export {resource, properties, view, activate, render, show}
