@@ -1,6 +1,6 @@
 {
   "name": "@dashkite/neon",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Combinators for dynamic browser pages.",
   "main": "build/npm/src/index.js",
   "scripts": {
