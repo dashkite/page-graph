@@ -98,3 +98,10 @@ Views are rendered within pages. So a blog post view might be rendered like this
 
 > **Limitation ▸ ** You currently cannot tailor the class names.
 
+### `activate selectors, context`
+
+Dispatches an activate event to the elements corresponding to the given selectors. This is typically done to notify any Web Components that have been rendered or updated that they're “on stage.”
+
+### `show context`
+
+Shows the view for the given render context. Until `show` is called, the view remains hidden.
