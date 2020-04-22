@@ -1,1 +1,37 @@
-{"name":"@dashkite/neon","version":"0.0.3","description":"Combinators for dynamic browser pages.","main":"build/npm/src/index.js","scripts":{"test":"p9k test"},"repository":{"type":"git","url":"git+https://github.com/dashkite/neon.git"},"keywords":["combinators","functional","fp","spa","coffeescript"],"author":"Dan Yoder","license":"SEE LICENSE IN LICENSE.md","bugs":{"url":"https://github.com/dashkite/page-graph/issues"},"homepage":"https://github.com/dashkite/page-graph#readme","devDependencies":{"panda-9000":"^5.0.2","panda-builder":"^4.0.13"},"dependencies":{"diffhtml":"^1.0.0-beta.12","panda-garden":"^5.0.0"},"files":["./build"]}
+{
+  "name": "@dashkite/neon",
+  "version": "0.0.3",
+  "description": "Combinators for dynamic browser pages.",
+  "main": "build/npm/src/index.js",
+  "scripts": {
+    "test": "p9k test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dashkite/neon.git"
+  },
+  "keywords": [
+    "combinators",
+    "functional",
+    "fp",
+    "spa",
+    "coffeescript"
+  ],
+  "author": "Dan Yoder",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/dashkite/page-graph/issues"
+  },
+  "homepage": "https://github.com/dashkite/page-graph#readme",
+  "devDependencies": {
+    "panda-9000": "^5.0.2",
+    "panda-builder": "^4.0.13"
+  },
+  "dependencies": {
+    "diffhtml": "^1.0.0-beta.12",
+    "panda-garden": "^5.0.0"
+  },
+  "files": [
+    "./build"
+  ]
+}
