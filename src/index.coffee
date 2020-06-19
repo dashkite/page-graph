@@ -1,5 +1,5 @@
 import {innerHTML as diff} from "diffhtml"
-import {tee, rtee, curry} from "panda-garden"
+import {tee, rtee, curry} from "@pandastrike/garden"
 
 $ = (root, selector) -> root.querySelector selector
 $$ = (root, selector) -> (root.querySelectorAll selector) ? []
