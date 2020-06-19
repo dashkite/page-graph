@@ -19,19 +19,23 @@
   },
   "license": "SEE LICENSE IN LICENSE.md",
   "author": "Dan Yoder",
-  "main": "build/npm/src/index.js",
+  "main": "build/src/index.js",
   "files": [
-    "./build"
+    "./build/src"
   ],
   "scripts": {
-    "test": "p9k test"
+    "test": "genie test"
   },
   "dependencies": {
-    "diffhtml": "^1.0.0-beta.15",
-    "panda-garden": "^5.0.0"
+    "@pandastrike/garden": "^8.0.0-alpha.1",
+    "diffhtml": "^1.0.0-beta.15"
   },
   "devDependencies": {
-    "panda-9000": "^5.0.2",
-    "panda-builder": "^4.0.13"
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "@dashkite/brick": "file:../brick",
+    "@dashkite/genie": "file:../genie",
+    "coffeescript": "^2.5.1",
+    "panda-quill": "^5.0.0"
   }
 }
