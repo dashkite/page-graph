@@ -30,11 +30,11 @@
   },
   "dependencies": {
     "@pandastrike/garden": "^8.0.0-alpha.1",
-    "diffhtml": "^1.0.0-beta.15"
+    "diffhtml": "^1.0.0-beta.18"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.2",
-    "@babel/preset-env": "^7.10.2",
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
     "@dashkite/brick": "0.0.1",
     "@dashkite/genie": "0.0.1",
     "coffeescript": "^2.5.1",
