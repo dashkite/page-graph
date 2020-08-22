@@ -55,7 +55,9 @@ activate = curry rtee (handler, context) ->
 
 deactivate = curry rtee (handler, context) ->
   if context.initializing
-    observer = new IntersectionObserver handler, threshold: 0
+    _handler = ([..., {intersectionRatio}]) ->
+      if intersectionRatio <= 0 then handler()
+    observer = new IntersectionObserver _handler, threshold: 0
     observer.observe context.view
 
 
