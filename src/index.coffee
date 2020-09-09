@@ -1,5 +1,16 @@
-import {innerHTML as diff} from "diffhtml"
+import {use, innerHTML as diff} from "diffhtml"
 import {tee, rtee, curry} from "@pandastrike/garden"
+
+use
+  syncTreeHook: (oldTree, newTree) ->
+    # Ignore style elements.
+    if oldTree.nodeName == "head"
+      styles = []
+      for child in oldTree.childNodes
+        styles.push child if child.nodeName == "style"
+
+      newTree.childNodes.push styles...
+      return newTree
 
 $ = (root, selector) -> root.querySelector selector
 $$ = (root, selector) -> (root.querySelectorAll selector) ? []
@@ -41,8 +52,16 @@ properties = curry rtee (dictionary, context) ->
 view = curry rtee (selector, template, context) ->
   _view template, _page _root selector, context
 
-render = curry rtee (selector, template, context) ->
-  diff ($ document, selector), template context.bindings
+_render = curry rtee (selector, string) ->
+  diff ($ document, selector), string
+
+renderN = curry rtee (selector, fx, context) ->
+  string = ""
+  string += f context.bindings for f in fx
+  _render selector, string
+
+render = curry rtee (selector, f, context) ->
+  renderN selector, [f], context
 
 show = tee (context) ->
   for el in $$ context.root, ".active"
@@ -51,14 +70,23 @@ show = tee (context) ->
   context.view.classList.add "active"
 
 activate = curry rtee (handler, context) ->
-  handler context.bindings, context
+  _handler = ([..., {intersectionRatio}]) ->
+    if intersectionRatio > 0
+      handler context.bindings, context
+      observer.unobserve context.view
+
+  observer = new IntersectionObserver _handler, threshold: 0
+  observer.observe context.view
 
 deactivate = curry rtee (handler, context) ->
-  if context.initializing
-    _handler = ([..., {intersectionRatio}]) ->
-      if intersectionRatio <= 0 then handler()
-    observer = new IntersectionObserver _handler, threshold: 0
-    observer.observe context.view
+  _handler = ([..., {intersectionRatio}]) ->
+    if intersectionRatio <= 0
+      handler context.bindings, context
+      observer.unobserve context.view
+
+  observer = new IntersectionObserver _handler, threshold: 0
+  observer.observe context.view
 
 
-export {resource, properties, view, activate, deactivate, render, show}
+export {resource, properties, view, activate, deactivate, show,
+  _render, render, renderN}
