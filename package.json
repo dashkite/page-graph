@@ -29,7 +29,7 @@
     "test": "genie test"
   },
   "dependencies": {
-    "@pandastrike/garden": "^8.0.0-alpha.1",
+    "@pandastrike/garden": "^8.0.1",
     "diffhtml": "^1.0.0-beta.18"
   },
   "devDependencies": {
