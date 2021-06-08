@@ -63,6 +63,10 @@ renderN = curry rtee (selector, fx, context) ->
 render = curry rtee (selector, f, context) ->
   renderN selector, [f], context
 
+classList = curry rtee (selector, classes, context) ->
+  document.querySelector selector
+  .setAttribute "class", (classes context.bindings).join " "
+
 show = tee (context) ->
   for el in $$ context.root, ".active"
     el.classList.remove "active"
@@ -87,6 +91,5 @@ deactivate = curry rtee (handler, context) ->
   observer = new IntersectionObserver _handler, threshold: 0
   observer.observe context.view
 
-
 export {resource, properties, view, activate, deactivate, show,
-  _render, render, renderN}
+  _render, render, renderN, classList}
