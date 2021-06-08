@@ -1,5 +1,5 @@
-import {use, innerHTML as diff} from "diffhtml"
-import {tee, rtee, curry} from "@pandastrike/garden"
+import { use, innerHTML as diff } from "diffhtml"
+import { tee, rtee, curry } from "@dashkite/joy/function"
 
 use
   syncTreeHook: (oldTree, newTree) ->
