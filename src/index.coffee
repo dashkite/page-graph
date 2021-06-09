@@ -57,7 +57,7 @@ _render = curry rtee (selector, string) ->
 
 renderN = curry rtee (selector, fx, context) ->
   string = ""
-  string += f context.bindings for f in fx
+  string += f context for f in fx
   _render selector, string
 
 render = curry rtee (selector, f, context) ->
