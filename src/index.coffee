@@ -76,7 +76,7 @@ show = tee (context) ->
 activate = curry rtee (handler, context) ->
   _handler = ([..., {intersectionRatio}]) ->
     if intersectionRatio > 0
-      handler context.bindings, context
+      handler context
       observer.unobserve context.view
 
   observer = new IntersectionObserver _handler, threshold: 0
@@ -85,11 +85,24 @@ activate = curry rtee (handler, context) ->
 deactivate = curry rtee (handler, context) ->
   _handler = ([..., {intersectionRatio}]) ->
     if intersectionRatio <= 0
-      handler context.bindings, context
+      handler context
       observer.unobserve context.view
 
   observer = new IntersectionObserver _handler, threshold: 0
   observer.observe context.view
 
-export {resource, properties, view, activate, deactivate, show,
-  _render, render, renderN, classList}
+dispose = deactivate (context) -> context.view.remove()
+
+export {
+  resource
+  properties
+  view
+  activate
+  deactivate
+  dispose
+  show
+  _render
+  render
+  renderN
+  classList
+}
