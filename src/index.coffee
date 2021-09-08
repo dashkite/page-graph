@@ -28,12 +28,14 @@ _page = tee (context) ->
     (append context.root, "<div class='page' name='#{context.data.name}'>")
 
 _view = curry rtee (template, context) ->
-  { path } = context
   context.initializing = false
-  context.view = ($ context.page, "[data-path='#{path}']") ?
+  context.view = ($ context.page, "[data-path='#{context.path}']") ?
     do ->
       # create and initialize view
-      view = append context.page, "<div class='view' data-path='#{path}'>"
+      view = append context.page,
+        "<div class='view'
+          data-path='#{context.path}' 
+          data-name='#{context.data.name}'>"
       context.initializing = true
       view.addEventListener "dispose", -> context.page.removeChild context.view
       view
