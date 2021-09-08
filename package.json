@@ -1,6 +1,6 @@
 {
   "name": "@dashkite/neon",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Combinators for dynamic browser pages.",
   "keywords": [
     "combinators",
