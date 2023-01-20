@@ -42,6 +42,3 @@ presets:
   browser:
     logging: false
     fallback: ./build/browser/test/client/index.html
-
-modules:
-  db: "7tro1s4qcwnz2ytrj1eox8y1a"
