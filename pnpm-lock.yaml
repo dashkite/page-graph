@@ -1,29 +1,29 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@dashkite/amen': ^0.1.2
-  '@dashkite/amen-console': ^0.0.1
+  '@dashkite/amen': ^0.2.0
+  '@dashkite/amen-console': ^0.0.2
   '@dashkite/assert': ^0.1.3
-  '@dashkite/genie': ^0.5.4
+  '@dashkite/genie': ^0.5.11
   '@dashkite/genie-modules': link:../genie-modules
-  '@dashkite/genie-presets': ^0.6.2
+  '@dashkite/genie-presets': ^0.6.4
   '@dashkite/joy': ^0.3.11
   '@dashkite/katana': ^0.4.8
   '@dashkite/mimic': ^0.2.4
-  coffeescript: ^2.5.1
-  diffhtml: ^1.0.0-beta.20
+  coffeescript: ^2.7.0
+  diffhtml: 1.0.0-beta.20
 
 dependencies:
   '@dashkite/joy': 0.3.16
-  diffhtml: 1.0.0-beta.29
+  diffhtml: 1.0.0-beta.20
 
 devDependencies:
-  '@dashkite/amen': 0.1.2
-  '@dashkite/amen-console': 0.0.1
+  '@dashkite/amen': 0.2.0
+  '@dashkite/amen-console': 0.0.2
   '@dashkite/assert': 0.1.4
   '@dashkite/genie': 0.5.11
   '@dashkite/genie-modules': link:../genie-modules
-  '@dashkite/genie-presets': 0.6.2
+  '@dashkite/genie-presets': 0.6.4
   '@dashkite/katana': 0.4.8
   '@dashkite/mimic': 0.2.4
   coffeescript: 2.7.0
@@ -2075,12 +2075,14 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@dashkite/amen-console/0.0.1:
-    resolution: {integrity: sha512-ZJ0a1vNxqULnXN5e0vCkHVHnmK8XPaUrzGKF77cpCMqnBmO69D/UwzhAmT0lzHXQJ6zXEdTMfExO9LsQt14FiQ==}
+  /@dashkite/amen-console/0.0.2:
+    resolution: {integrity: sha512-16xkmucNi9enIjXI3Khf54mdvDFG7+QSeB4/Xlh3AGKjPCwSQppV/DTVgaI5mkYcYO3b9v6RGrEGYvaji4ynVw==}
+    dependencies:
+      chalk: 4.1.2
     dev: true
 
-  /@dashkite/amen/0.1.2:
-    resolution: {integrity: sha512-lQwxCo97oKnNrH+mNcF/fTi1WFY+YfOHBD31NDkvcu/R6HOtLQa08agyZBRk5kJrOjHYI8kAdOkjjOWw8LEC5g==}
+  /@dashkite/amen/0.2.0:
+    resolution: {integrity: sha512-64cI0qvcLXFhfuvNGI/ebUgbs7Rx+45K1EjqsdLVYjEALeAPGqViujiSWVky9KHw1F93FVpJx1/B6mlZJLf2Tg==}
     dev: true
 
   /@dashkite/assert/0.1.4:
@@ -2089,8 +2091,8 @@ packages:
       '@dashkite/joy': 0.3.16
     dev: true
 
-  /@dashkite/atlas/0.5.2:
-    resolution: {integrity: sha512-um4JjsHgIpKPzQHRCX8T8foWZozjStTzFsUMaVVTDBwT5EuhBJpxJBBcQcSrvMmukNgrJfhpoTqU+9kNS9paRg==}
+  /@dashkite/atlas/0.6.1:
+    resolution: {integrity: sha512-5l/fLMHd5QsBiNxAaqw4ibS+Grdma0GlesaRtiUQwywtr3XMVeGHcNfEczLjgnesCDh02GuyzmlMaApoJecp6A==}
     dependencies:
       '@dashkite/joy': 0.3.16
       fast-glob: 3.2.12
@@ -2103,11 +2105,11 @@ packages:
       - supports-color
     dev: true
 
-  /@dashkite/genie-presets/0.6.2:
-    resolution: {integrity: sha512-3EeevHZqwK00faISFmV0Ah99qF7B9rB4LagtHRkriuVhYqWn44FQxdPjGTiseLHX+KHDn/h7yiRxhxlt0dpluA==}
+  /@dashkite/genie-presets/0.6.4:
+    resolution: {integrity: sha512-D97FVPYc0ersBOAWLOaY0bS9O/dvoDr10SB2mq63qM08bjopQJsPH+rZ/ienLCWpONFpa83B3274Xjz9wXSw5A==}
     dependencies:
       '@dashkite/joy': 0.3.16
-      '@dashkite/masonry': 0.12.5
+      '@dashkite/masonry': 0.12.7
       '@dashkite/mimic': 0.2.4
       '@dashkite/writeme': 0.2.0
       ajv: 8.12.0
@@ -2157,12 +2159,12 @@ packages:
       '@dashkite/joy': 0.3.16
     dev: true
 
-  /@dashkite/masonry/0.12.5:
-    resolution: {integrity: sha512-sPdMI3oUBlXV3E+6skiWVc0+iuIPJ0vmezxGbCRECoa4egK3P+O/dEqXcRWgXbtDIDbVcMgtB1rIt6q8FT2g5A==}
+  /@dashkite/masonry/0.12.7:
+    resolution: {integrity: sha512-39vKk91lA1TRmaHqEwCdoCy2/XrUnTi+7Mcheb4RuxiAjj/nS7G4VHW/O967qoK7aeBH0GEXTax5iu+mqngvwQ==}
     dependencies:
       '@babel/core': 7.20.12
       '@babel/preset-env': 7.20.2_@babel+core@7.20.12
-      '@dashkite/atlas': 0.5.2
+      '@dashkite/atlas': 0.6.1
       '@dashkite/joy': 0.3.16
       '@dashkite/katana': 0.4.8
       babel-plugin-add-import-extension: 1.6.0_@babel+core@7.20.12
@@ -2916,8 +2918,8 @@ packages:
     resolution: {integrity: sha512-4INMPwNm9XRpBukhNbF7OB6fNTTCaI8pzy/fXg0xQzAy5h3zL1P8xT3QazgKqBrb/hAYwIBizqDBZ7GtJE74QQ==}
     dev: true
 
-  /diffhtml/1.0.0-beta.29:
-    resolution: {integrity: sha512-X3ZBa5FOBIBBgMo/MHqQFZTQhOgbJmET6JS5CRrJBKVkmdWF7AemldX2lzF2+c6arFykQ6SOI1SDlY6r2+2z5g==}
+  /diffhtml/1.0.0-beta.20:
+    resolution: {integrity: sha512-xSSwGb2dkQsTc7Bl910iySH65PkzsCtowfVGMfrmc2fEwvYrhJUpIEIx+3mpZ1wMWVt+t/0ltVwrjQkMJotxLg==}
     dev: false
 
   /dir-glob/3.0.1:
