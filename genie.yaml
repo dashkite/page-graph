@@ -44,3 +44,5 @@ presets:
   browser:
     logging: false
     fallback: ./build/browser/test/client/index.html
+
+modules: {}
