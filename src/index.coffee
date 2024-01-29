@@ -85,7 +85,7 @@ activate = curry rtee (handler, context) ->
   observer.observe context.view
 
 deactivate = curry rtee (handler, context) ->
-  _handler = ([..., {intersectionRatio}]) ->
+  _handler = (car[..., {intersectionRatio}]) ->
     if intersectionRatio <= 0
       handler context
       observer.unobserve context.view
@@ -95,6 +95,9 @@ deactivate = curry rtee (handler, context) ->
 
 dispose = deactivate (context) -> context.view.remove()
 
+event = curry rtee ( name, handler, context ) ->
+  context.view.addEventListener name, handler
+
 export {
   resource
   properties
@@ -103,6 +106,7 @@ export {
   deactivate
   dispose
   show
+  event
   _render
   render
   renderN
