@@ -85,7 +85,7 @@ activate = curry rtee (handler, context) ->
   observer.observe context.view
 
 deactivate = curry rtee (handler, context) ->
-  _handler = (car[..., {intersectionRatio}]) ->
+  _handler = ([..., {intersectionRatio}]) ->
     if intersectionRatio <= 0
       handler context
       observer.unobserve context.view
@@ -111,4 +111,15 @@ export {
   render
   renderN
   classList
+}
+
+export default {
+  resource
+  view
+  activate
+  deactivate
+  dispose
+  show
+  event
+  render
 }
