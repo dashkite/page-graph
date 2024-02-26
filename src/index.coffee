@@ -16,7 +16,7 @@ $ = (root, selector) -> root.querySelector selector
 $$ = (root, selector) -> (root.querySelectorAll selector) ? []
 join = (selectors) -> selectors.join ", "
 
-append = curry (root, html) ->
+_append = curry (root, html) ->
   root.insertAdjacentHTML "beforeend", html
   root.lastElementChild
 
@@ -25,14 +25,14 @@ _root = curry rtee (selector, context) ->
 
 _page = tee (context) ->
   context.page = ($ context.root, ".page[name='#{context.data.name}']") ?
-    (append context.root, "<div class='page' name='#{context.data.name}'>")
+    (_append context.root, "<div class='page' name='#{context.data.name}'>")
 
 _view = curry rtee (template, context) ->
   context.initializing = false
   context.view = ($ context.page, "[data-path='#{context.path}']") ?
     do ->
       # create and initialize view
-      view = append context.page,
+      view = _append context.page,
         "<div class='view'
           data-path='#{context.path}' 
           data-name='#{context.data.name}'>"
@@ -64,6 +64,9 @@ renderN = curry rtee (selector, fx, context) ->
 
 render = curry rtee (selector, f, context) ->
   renderN selector, [f], context
+
+append = curry rtee ( selector, f, context ) ->
+  _append ( $ document, selector ), f context
 
 classList = curry rtee (selector, classes, context) ->
   document.querySelector selector
@@ -109,6 +112,7 @@ export {
   event
   _render
   render
+  append
   renderN
   classList
 }
@@ -122,4 +126,5 @@ export default {
   show
   event
   render
+  append
 }
