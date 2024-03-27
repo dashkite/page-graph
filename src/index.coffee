@@ -1,5 +1,5 @@
 import { use, innerHTML as diff } from "diffhtml"
-import { tee, rtee, curry } from "@dashkite/joy/function"
+import * as Fn from "@dashkite/joy/function"
 
 use
   syncTreeHook: (oldTree, newTree) ->
@@ -12,113 +12,120 @@ use
       newTree.childNodes.push styles...
       return newTree
 
-$ = (root, selector) -> root.querySelector selector
-$$ = (root, selector) -> (root.querySelectorAll selector) ? []
-join = (selectors) -> selectors.join ", "
+$ = ( root, selector ) -> root.querySelector selector
 
-_append = curry (root, html) ->
-  root.insertAdjacentHTML "beforeend", html
-  root.lastElementChild
+$$ = ( root, selector ) -> (root.querySelectorAll selector) ? []
 
-_root = curry rtee (selector, context) ->
-  context.root = $ document, selector
+Selectors =
 
-_page = tee (context) ->
-  context.page = ($ context.root, ".page[name='#{context.data.name}']") ?
-    (_append context.root, "<div class='page' name='#{context.data.name}'>")
+  join: ( selectors ) -> selectors.join ", "
 
-_view = curry rtee (template, context) ->
-  context.initializing = false
-  context.view = ($ context.page, "[data-path='#{context.path}']") ?
-    do ->
-      # create and initialize view
-      view = _append context.page,
-        "<div class='view'
-          data-path='#{context.path}' 
-          data-name='#{context.data.name}'>"
-      context.initializing = true
-      view.addEventListener "dispose", -> context.page.removeChild context.view
-      view
-  diff context.view, template context
+DOM =
+
+  append: ( root, html ) ->
+    root.insertAdjacentHTML "beforeend", html
+    root.lastElementChild
+
+Page =
+
+  get: ( context ) ->
+    $ context.root, ".page[name='#{context.data.name}']"
+
+  make: ( context ) ->
+    DOM.append context.root,
+      "<div class='page' name='#{context.data.name}'>"
+  
 
 
-resource = curry rtee (getter, context) ->
-  context.resource = await getter context
+View =
 
-properties = curry rtee (dictionary, context) ->
-  Promise.all do ->
-    for key, getter of dictionary
-      do (key, getter) ->
-        context.bindings[key] = await getter context
+  get: ( context ) ->
+    $ context.page, "[data-path='#{context.path}']"
 
-view = curry rtee (selector, template, context) ->
-  _view template, _page _root selector, context
+  make: ( context ) ->
+    DOM.append context.page,
+      "<div class='view'
+        data-path='#{context.path}' 
+        data-name='#{context.data.name}'>"
 
-_render = curry rtee (selector, string) ->
-  diff ($ document, selector), string
+Context =
 
-renderN = curry rtee (selector, fx, context) ->
-  string = ""
-  string += f context for f in fx
-  _render selector, string
+  root: ( selector ) ->
+    Fn.tee ( context ) -> 
+      context.root = $ document, selector
 
-render = curry rtee (selector, f, context) ->
-  renderN selector, [f], context
+  page: Fn.tee ( context ) ->
+    context.page = ( Page.get context ) ? ( Page.make context )
 
-append = curry rtee ( selector, f, context ) ->
-  _append ( $ document, selector ), f context
+  view: ( template ) ->
+    Fn.tee ( context ) ->
+      if ( context.view = View.get context )?
+        context.initializing = false
+      else
+        context.initializing = true
+        context.view = View.make context
+        context.view.addEventListener "dispose", -> 
+          context.page.removeChild context.view
+      diff context.view, template context
 
-classList = curry rtee (selector, classes, context) ->
-  document.querySelector selector
-  .setAttribute "class", (classes context.bindings).join " "
+view = ( selector, template ) ->
+  Fn.tee Fn.pipe [
+    Context.root selector
+    Context.page
+    Context.view template
+  ]
 
-show = tee (context) ->
-  for el in $$ context.root, ".active"
-    el.classList.remove "active"
+render = ( selector, template ) ->
+  Fn.tee ( context ) ->
+    diff ( $ document, selector ), template context
+
+append = ( selector, template ) ->
+  Fn.tee ( context ) ->
+    DOM.append ( $ document, selector ), template context
+
+show = Fn.tee ( context ) ->
+  for element in $$ context.root, ".active"
+    element.classList.remove "active"
   context.page.classList.add "active"
   context.view.classList.add "active"
 
-activate = curry rtee (handler, context) ->
-  _handler = ([..., {intersectionRatio}]) ->
-    if intersectionRatio > 0
-      handler context
-      observer.unobserve context.view
+activate = ( handler ) ->
+  Fn.tee ( context ) ->
+    _handler = ([..., {intersectionRatio}]) ->
+      if intersectionRatio > 0
+        handler context
+        observer.unobserve context.view
+    observer = new IntersectionObserver _handler, threshold: 0
+    observer.observe context.view
 
-  observer = new IntersectionObserver _handler, threshold: 0
-  observer.observe context.view
+deactivate = ( handler ) ->
+  Fn.tee ( context ) ->
+    _handler = ([..., {intersectionRatio}]) ->
+      if intersectionRatio <= 0
+        handler context
+        observer.unobserve context.view
+    observer = new IntersectionObserver _handler, threshold: 0
+    observer.observe context.view
 
-deactivate = curry rtee (handler, context) ->
-  _handler = ([..., {intersectionRatio}]) ->
-    if intersectionRatio <= 0
-      handler context
-      observer.unobserve context.view
+dispose = deactivate ( context ) -> context.view.remove()
 
-  observer = new IntersectionObserver _handler, threshold: 0
-  observer.observe context.view
-
-dispose = deactivate (context) -> context.view.remove()
-
-event = curry rtee ( name, handler, context ) ->
-  context.view.addEventListener name, handler
+event = ( name, handler ) ->
+  Fn.tee ( context ) ->
+    _handler = ( event ) -> handler event, context
+    context.view.addEventListener name, handler, once: true
 
 export {
-  resource
-  properties
   view
   activate
   deactivate
   dispose
   show
   event
-  _render
   render
   append
-  renderN
-  classList
 }
 
 export default {
-  resource
   view
   activate
   deactivate
