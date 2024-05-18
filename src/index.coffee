@@ -114,6 +114,8 @@ event = ( name, handler ) ->
     _handler = ( event ) -> handler event, context
     context.view.addEventListener name, handler, once: true
 
+success = ( handler ) -> event success: handler
+
 export {
   view
   activate
@@ -121,6 +123,7 @@ export {
   dispose
   show
   event
+  success
   render
   append
 }
@@ -132,6 +135,7 @@ export default {
   dispose
   show
   event
+  success
   render
   append
 }
