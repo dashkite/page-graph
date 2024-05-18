@@ -112,9 +112,11 @@ dispose = deactivate ( context ) -> context.view.remove()
 event = ( name, handler ) ->
   Fn.tee ( context ) ->
     _handler = ( event ) -> handler event, context
-    context.view.addEventListener name, handler, once: true
+    context.view.addEventListener name, handler
 
-success = ( handler ) -> event success: handler
+success = ( handler ) -> event "success", handler
+
+failure = ( handler ) -> event "failure", handler
 
 export {
   view
@@ -124,6 +126,7 @@ export {
   show
   event
   success
+  failure
   render
   append
 }
@@ -136,6 +139,7 @@ export default {
   show
   event
   success
+  failure
   render
   append
 }
